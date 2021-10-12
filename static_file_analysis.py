@@ -47,6 +47,9 @@ def analyze_file(some_token: str) -> list:
 def get_report(oauth_token: str, id: str) -> dict:
     '''
     Get analysis reports
+
+    Change the format of reports by changing the query string
+    report formats: json, html, text
     '''
     job = requests.get(
         f'https://us.api.labs.sophos.com/analysis/file/static/v1/reports/{id}?report_format=json',
