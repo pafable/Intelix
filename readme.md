@@ -4,6 +4,7 @@ Uses Intelix to analyze files and links for malicious content.
 
 ## Prerequistes
 
+- Python3 (Tested on python 3.7.9)
 - AWS account
 - Subscribe to Sophos Intelix in [AWS Marketplace](https://aws.amazon.com/marketplace/pp/prodview-k4jb2agd65ses)
 
