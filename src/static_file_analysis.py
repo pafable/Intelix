@@ -1,7 +1,7 @@
 from time import sleep
+from token import get_token
 import requests
 import logging
-import json
 import os
 
 logging.basicConfig(
@@ -9,31 +9,11 @@ logging.basicConfig(
     format='[%(levelname)s] %(asctime)s %(message)s'
 )
 
-CRED_FILE = 'credentials.json'
-ANALYZE_DIR = 'files_to_analyze'
-
-
-def get_token(cred: str) -> str:
-    '''
-    Obtain an oauth token
-    '''
-    with open(cred, 'r') as content:
-        x = json.loads(content.read())
-        client_id = x['client-id']
-        client_secret = x['client-secret']
-
-    grant = {'grant_type': 'client_credentials'}
-    token_resp = requests.post(
-        'https://api.labs.sophos.com/oauth2/token',
-        auth=(client_id, client_secret),
-        data=grant
-    )
-    return token_resp.json()['access_token']
-
+ANALYZE_DIR = '../files_to_analyze'
 
 def analyze_file(some_token: str) -> list:
     '''
-    Do a static analysis of files 
+    Does a static analysis of files 
     '''
     l1 = []
     files_to_analyze = os.listdir(ANALYZE_DIR)
@@ -50,7 +30,7 @@ def analyze_file(some_token: str) -> list:
 
 def get_report(oauth_token: str, id: str) -> dict:
     '''
-    Get analysis reports
+    Gets analysis reports
 
     Change the format of reports by changing the query string
     report formats: json, html, text
@@ -63,7 +43,7 @@ def get_report(oauth_token: str, id: str) -> dict:
 
 
 if __name__ == '__main__':
-    token = get_token(CRED_FILE)
+    token = get_token()
     report = analyze_file(token)
 
     for i in report:
@@ -78,6 +58,6 @@ if __name__ == '__main__':
                 sleep(5)
                 status = get_report(token, id)['jobStatus']
 
-            print(get_report(token, id))
+            print(f'\n{get_report(token, id)}')
         except Exception as e:
             pass
