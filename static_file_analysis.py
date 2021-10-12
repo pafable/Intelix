@@ -1,8 +1,13 @@
 from time import sleep
 import requests
+import logging
 import json
 import os
 
+logging.basicConfig(
+    level=logging.INFO,
+    format='[%(levelname)s] %(asctime)s %(message)s'
+)
 
 CRED_FILE = 'credentials.json'
 ANALYZE_DIR = 'files_to_analyze'
@@ -43,7 +48,6 @@ def analyze_file(some_token: str) -> list:
     return l1   
 
 
-
 def get_report(oauth_token: str, id: str) -> dict:
     '''
     Get analysis reports
@@ -63,11 +67,17 @@ if __name__ == '__main__':
     report = analyze_file(token)
 
     for i in report:
-        id = i['jobId']
-        status = i['jobStatus']
-        while status == 'IN_PROGRESS':
-            print('STILL IN PROGRESS...')
-            sleep(5)
-            status = get_report(token, id)['jobStatus']
+        try:
+            status = i['jobStatus']
+            id = i['jobId']
+            logging.info(f'STATUS: {status}')
+            logging.info(f'ID: {id}')
 
-        print(get_report(token, id))
+            while status == 'IN_PROGRESS':
+                logging.info('STILL IN PROGRESS...')
+                sleep(5)
+                status = get_report(token, id)['jobStatus']
+
+            print(get_report(token, id))
+        except Exception as e:
+            pass
