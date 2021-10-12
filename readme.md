@@ -10,7 +10,7 @@ Uses Intelix to analyze files and links for malicious content.
 
 ## Setup
 
-Obtain a Intelix credentials json file and place it in the project's root directory.
+Obtain an Intelix credentials json file and place it in the project's root directory.
 
 ## Static File Analysis
 
