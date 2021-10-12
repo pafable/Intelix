@@ -1,0 +1,5 @@
+credentials.json
+files_to_analyze/*
+!files_to_analyze/.gitkeep
+__pycache__
+.venv
