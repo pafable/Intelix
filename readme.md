@@ -24,3 +24,4 @@ python3 static_file_analysis.py
 
 - Setup dynamic file analysis
 - Setup URL checker
+- Create a commandline tool
