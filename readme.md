@@ -53,6 +53,12 @@ Example Intelix static file analysis
 intelix-static -f <filename>
 ```
 
+- intelix-dynamic
+
+```
+intelix-dynamic -f <filename>
+```
+
 ### TODO
 
 - Setup dynamic file analysis
