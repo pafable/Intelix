@@ -1,5 +1,5 @@
 from time import sleep
-import intelix_commands
+import intelix_cli
 import requests
 import logging
 import os
@@ -43,7 +43,8 @@ def get_report(oauth_token: str, id: str) -> dict:
 
 
 def main():
-    token = intelix_commands.get_token()
+    token = intelix_cli.get_token()
+    logging.info(token)
     report = analyze_file(token)
     for i in report:
         try:
@@ -60,3 +61,6 @@ def main():
             print(f'\n{get_report(token, id)}')
         except Exception as e:
             pass
+
+if __name__ == "__main__":
+    main
