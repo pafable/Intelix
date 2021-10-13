@@ -1,31 +1,21 @@
 from time import sleep
 import intelix_cli
 import requests
-import logging
-import os
+import sys
 
-logging.basicConfig(
-    level=logging.INFO,
-    format='[%(levelname)s] %(asctime)s %(message)s'
-)
 
-ANALYZE_DIR = '../files_to_analyze'
-
-def analyze_file(some_token: str) -> list:
+def analyze_file(some_token: str, sus: str) -> list:
     '''
     Does a static analysis of files 
     '''
-    l1 = []
-    files_to_analyze = os.listdir(ANALYZE_DIR)
-    for x in files_to_analyze:
-        files = {'file': open(f'{ANALYZE_DIR}/{x}', 'rb')}
-        static_file_resp = requests.post(
-            'https://us.api.labs.sophos.com/analysis/file/static/v1',
-            files=files,
-            headers={'Authorization': some_token}
-        )
-        l1.append(static_file_resp.json())
-    return l1   
+    files = {"file": open(f'{sus}', "rb")}
+    static_file_resp = requests.post(
+        'https://us.api.labs.sophos.com/analysis/file/static/v1',
+        files=files,
+        headers={"Authorization": some_token}
+    )
+
+    return static_file_resp.json()
 
 
 def get_report(oauth_token: str, id: str) -> dict:
@@ -36,31 +26,32 @@ def get_report(oauth_token: str, id: str) -> dict:
     report formats: json, html, text
     '''
     job = requests.get(
-        f'https://us.api.labs.sophos.com/analysis/file/static/v1/reports/{id}?report_format=json',
-        headers={'Authorization': oauth_token}
+        f"https://us.api.labs.sophos.com/analysis/file/static/v1/reports/{id}?report_format=json",
+        headers={"Authorization": oauth_token}
     )
     return job.json()
 
 
 def main():
+    parser = intelix_cli.parser
     token = intelix_cli.get_token()
-    logging.info(token)
-    report = analyze_file(token)
-    for i in report:
-        try:
-            status = i['jobStatus']
-            id = i['jobId']
-            logging.info(f'STATUS: {status}')
-            logging.info(f'ID: {id}')
+    inputs = intelix_cli.args.__dict__
 
-            while status == 'IN_PROGRESS':
-                logging.info('STILL IN PROGRESS...')
-                sleep(5)
-                status = get_report(token, id)['jobStatus']
+    if inputs["file"] == None and inputs["dir"] == None:
+        parser.print_help()
+        sys.exit(1)
+    
+    report = analyze_file(token, inputs["file"])
+    try:
+        status = report["jobStatus"]
+        id = report["jobId"]
+        while status == "IN_PROGRESS":
+            sleep(3)
+            status = get_report(token, id)["jobStatus"]
+        print(get_report(token, id))
+    except Exception as e:
+        pass
 
-            print(f'\n{get_report(token, id)}')
-        except Exception as e:
-            pass
 
 if __name__ == "__main__":
     main

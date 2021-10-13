@@ -23,18 +23,36 @@ python3 static_file_analysis.py
 
 ## Commandline
 
-Place the Intelix credentials.json file in your home directory within an `.intelix` folder. 
+**Installing and uninstalling commandline**
+
+Use the `make` command to install and uninstall.
+
+INSTALL:
+
+```
+make install
+```
+
+UNINSTALL
+
+```
+make uninstall
+```
+
+Place the Intelix credentials.json file in your home directory within an `.intelix` folder.
 
 `/home/username/.intelix/credentials.json`
 
-__COMMANDS__
+**COMMANDS**
+
 - intelix-static
 
-Example Intelix Static File Analysis
-```
-intelix-static -f <filename>
+Example Intelix static file analysis
 
 ```
+intelix-static -f <filename>
+```
+
 ### TODO
 
 - Setup dynamic file analysis

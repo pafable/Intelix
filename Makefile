@@ -1,4 +1,4 @@
-PYTHON = python
+PYTHON = python3
 
 build:
 	@echo "building package..."
@@ -11,14 +11,8 @@ env:
 install:
 	$(PYTHON) setup.py install
 
-download:
-	PIP_INDEX_URL=https://afable.jfrog.io/artifactory/api/pypi/pafable-pypi-local/simple $(PIP) install -U intelix_cli
-
 upload: build
 	$(PYTHON) setup.py sdist -r local
 
-test: download
-	intelix-file
-
-clean:
+uninstall:
 	rm -rf dist *.egg-info build
