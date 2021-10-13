@@ -17,9 +17,10 @@ def get_token() -> str:
         client_secret = x['client-secret']
 
     grant = {'grant_type': 'client_credentials'}
-    token_resp = requests.post(
-        'https://api.labs.sophos.com/oauth2/token',
-        auth=(client_id, client_secret),
-        data=grant
-    )
+    token_resp = requests.post('https://api.labs.sophos.com/oauth2/token',
+                               auth=(client_id, client_secret),
+                               data=grant)
     return token_resp.json()['access_token']
+
+if __name__ == "__main__":
+    print(get_token())

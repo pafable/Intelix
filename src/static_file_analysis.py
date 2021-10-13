@@ -1,5 +1,5 @@
 from time import sleep
-from token import get_token
+from oauth_token import get_token
 import requests
 import logging
 import os
