@@ -39,7 +39,7 @@ UNINSTALL
 make uninstall
 ```
 
-Place the Intelix credentials.json file in your home directory within an `.intelix` folder.
+Place the Intelix credentials.json file in your home directory within `.intelix` folder.
 
 `/home/username/.intelix/credentials.json`
 
