@@ -14,7 +14,6 @@ def analyze_file(some_token: str, sus: str) -> list:
         files=files,
         headers={"Authorization": some_token}
     )
-
     return static_file_resp.json()
 
 
