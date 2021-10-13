@@ -57,4 +57,3 @@ intelix-static -f <filename>
 
 - Setup dynamic file analysis
 - Setup URL checker
-- Create a commandline tool
