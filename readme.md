@@ -2,6 +2,10 @@
 
 Uses Intelix to analyze files and links for malicious content.
 
+*Supported OS:*
+- MacOS
+- Linux
+
 ## Prerequistes
 
 - Python3 (Tested on python 3.7.9)
@@ -23,7 +27,7 @@ python3 static_file_analysis.py
 
 ## Commandline
 
-**Installing and uninstalling commandline**
+**Installing and uninstalling CLI Tool**
 
 Use the `make` command to install and uninstall.
 
@@ -61,5 +65,4 @@ intelix-dynamic -f <filename>
 
 ### TODO
 
-- Setup dynamic file analysis
 - Setup URL checker

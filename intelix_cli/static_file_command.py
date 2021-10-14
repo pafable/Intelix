@@ -49,7 +49,7 @@ def main():
             status = get_report(token, id)["jobStatus"]
         print(get_report(token, id))
     except Exception as e:
-        pass
+        print(e)
 
 
 if __name__ == "__main__":
