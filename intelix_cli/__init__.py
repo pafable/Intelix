@@ -8,7 +8,7 @@ Commands used by all of the scripts
 '''
 parser = argparse.ArgumentParser(description='Intelix CLI Commands')
 parser.add_argument('-f', '--file', type=str, help='scans file')
-parser.add_argument('-d', '--dir', type=str, help='scans directory')
+parser.add_argument('-d', '--dir', type=str, help='scans directory | EXPERIMENTAL')
 args = parser.parse_args()
 
 CRED_FILE = f"{os.path.expanduser('~')}/.intelix/credentials.json"

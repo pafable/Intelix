@@ -2,6 +2,10 @@
 
 Uses Intelix to analyze files and links for malicious content.
 
+*Supported OS:*
+- MacOS
+- Linux
+
 ## Prerequistes
 
 - Python3 (Tested on python 3.7.9)
@@ -23,7 +27,7 @@ python3 static_file_analysis.py
 
 ## Commandline
 
-**Installing and uninstalling commandline**
+**Installing and uninstalling CLI Tool**
 
 Use the `make` command to install and uninstall.
 
@@ -39,7 +43,7 @@ UNINSTALL
 make uninstall
 ```
 
-Place the Intelix credentials.json file in your home directory within an `.intelix` folder.
+Place the Intelix credentials.json file in your home directory within `.intelix` folder.
 
 `/home/username/.intelix/credentials.json`
 
@@ -53,7 +57,12 @@ Example Intelix static file analysis
 intelix-static -f <filename>
 ```
 
+- intelix-dynamic
+
+```
+intelix-dynamic -f <filename>
+```
+
 ### TODO
 
-- Setup dynamic file analysis
 - Setup URL checker

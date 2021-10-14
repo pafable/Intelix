@@ -6,15 +6,15 @@ import sys
 
 def analyze_file(some_token: str, sus: str) -> list:
     '''
-    Does a static analysis of files 
+    Does a dynamic analysis of files 
     '''
     files = {"file": open(f'{sus}', "rb")}
-    static_file_resp = requests.post(
-        'https://us.api.labs.sophos.com/analysis/file/static/v1',
+    dynamic_file_resp = requests.post(
+        'https://us.api.labs.sophos.com/analysis/file/dynamic/v1/',
         files=files,
         headers={"Authorization": some_token}
     )
-    return static_file_resp.json()
+    return dynamic_file_resp.json()
 
 
 def get_report(oauth_token: str, id: str) -> dict:
@@ -25,7 +25,7 @@ def get_report(oauth_token: str, id: str) -> dict:
     report formats: json, html, text
     '''
     job = requests.get(
-        f"https://us.api.labs.sophos.com/analysis/file/static/v1/reports/{id}?report_format=json",
+        f"https://us.api.labs.sophos.com/analysis/file/dynamic/v1/reports/{id}?report_format=json",
         headers={"Authorization": oauth_token}
     )
     return job.json()

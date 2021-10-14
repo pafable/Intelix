@@ -5,10 +5,11 @@ build:
 	$(PYTHON) setup.py sdist
 
 env: 
-	@echo "creating virtual environment"
+	@echo "creating virtual environment..."
 	$(PYTHON) -m venv .venv
 
 install:
+	pip install -r requirements.txt
 	$(PYTHON) setup.py install
 
 upload: build
