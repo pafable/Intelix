@@ -3,14 +3,15 @@ import intelix_cli
 import requests
 import sys
 
+DYN_FILE_URL = "https://us.api.labs.sophos.com/analysis/file/dynamic/v1/"
 
 def analyze_file(some_token: str, sus: str) -> list:
     '''
     Does a dynamic analysis of files 
     '''
-    files = {"file": open(f'{sus}', "rb")}
+    files = {"file": open(sus, "rb")}
     dynamic_file_resp = requests.post(
-        'https://us.api.labs.sophos.com/analysis/file/dynamic/v1/',
+        DYN_FILE_URL,
         files=files,
         headers={"Authorization": some_token}
     )

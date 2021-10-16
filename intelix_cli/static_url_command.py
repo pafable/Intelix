@@ -3,16 +3,16 @@ import intelix_cli
 import requests
 import sys
 
-STATIC_FILE_URL = "https://us.api.labs.sophos.com/analysis/file/static/v1"
+STATIC_URL = "https://us.api.labs.sophos.com/analysis/url/static/v1/"
 
-def analyze_file(some_token: str, sus: str) -> list:
+def analyze_url(some_token: str, sus: str) -> list:
     '''
-    Does a static analysis of files 
+    Does a static analysis of url 
     '''
-    files = {"file": open(sus, "rb")}
+    data = {"url": sus}
     static_file_resp = requests.post(
-        STATIC_FILE_URL,
-        files=files,
+        STATIC_URL,
+        data=data,
         headers={"Authorization": some_token}
     )
     return static_file_resp.json()
@@ -26,7 +26,7 @@ def get_report(oauth_token: str, id: str) -> dict:
     report formats: json, html, text
     '''
     job = requests.get(
-        f"https://us.api.labs.sophos.com/analysis/file/static/v1/reports/{id}?report_format=json",
+        f"https://us.api.labs.sophos.com/analysis/url/static/v1/reports/{id}?report_format=json",
         headers={"Authorization": oauth_token}
     )
     return job.json()
@@ -37,11 +37,11 @@ def main():
     token = intelix_cli.get_token()
     inputs = intelix_cli.args.__dict__
 
-    if inputs["file"] == None and inputs["dir"] == None:
+    if inputs["url"] == None and inputs["dir"] == None:
         parser.print_help()
         sys.exit(1)
     
-    report = analyze_file(token, inputs["file"])
+    report = analyze_url(token, inputs["url"])
     try:
         status = report["jobStatus"]
         id = report["jobId"]
