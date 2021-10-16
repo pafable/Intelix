@@ -63,6 +63,11 @@ intelix-static -f <filename>
 intelix-dynamic -f <filename>
 ```
 
+- intelix-static-url
+```
+intelix-static-url -u <url>
+```
+
 ### TODO
 
 - Setup URL checker
