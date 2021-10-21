@@ -37,7 +37,7 @@ def main():
     token = intelix_cli.get_token()
     inputs = intelix_cli.args.__dict__
 
-    if inputs["url"] == None and inputs["dir"] == None:
+    if inputs["url"] is None and inputs["dir"] is None:
         parser.print_help()
         sys.exit(1)
     
