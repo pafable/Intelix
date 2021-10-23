@@ -22,4 +22,4 @@ jobs:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
           command: test
-          args: --skip-unresolved
+          args: --file=requirements.txt
