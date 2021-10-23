@@ -1,0 +1,25 @@
+name: Intelix CLI CI
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  snyk:
+    name: Deploy
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: true
+
+    steps:
+      - name: "Checkout"
+        uses: actions/checkout@v2
+
+      - name: snyk test
+        uses: snyk/actions/python@master
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        with:
+          command: test
+          args: --file=requirements.txt
