@@ -1,5 +1,5 @@
 # Sophos Intelix Cli
-
+# 3
 Uses Intelix to analyze files and links for malicious content.
 
 *Supported OS:*
